@@ -1,0 +1,7 @@
+app-id: com.paultirk.yatoo
+modules:
+  - name: yatoo
+    buildsystem: simple
+    sources:
+      - type: git
+        url: https://github.com/powerpaul17/yatoo.git
