@@ -1,5 +1,20 @@
 app-id: com.paultirk.yatoo
+runtime: org.freedesktop.Platform
+runtime-version: '22.08'
 sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.node18
+base: org.electronjs.Electron2.BaseApp
+base-version: '22.08'
+build-options:
+  append-path: /usr/lib/sdk/node18/bin
+  build-args:
+    - --share=network
+finish-args:
+  - --socket=x11
+  - --share=network
+command: run.sh
+separate-locales: false
 modules:
   - name: yatoo
     buildsystem: simple
@@ -7,3 +22,16 @@ modules:
       - type: git
         url: https://github.com/powerpaul17/yatoo.git
         tag: v0.1.0
+      - type: script
+        dest-filename: run.sh
+        commands:
+          - zypak-wrapper.sh /app/main/yatoo "$@"
+    build-commands:
+      - npm i
+      - npm run build-dev # build-prod
+      - npm run capacitor-sync
+      - cd electron && npm i
+      - cd electron && npm run build
+      - cd electron && npx electron-builder build --config ./electron-builder.config.json --linux --dir
+      - cd electron && cp -a dist/linux*unpacked /app/main
+      - install -Dm755 -t /app/bin/ ./run.sh
