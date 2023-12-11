@@ -21,7 +21,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/powerpaul17/yatoo.git
-        tag: v0.1.0
+        tag: v0.5.1
       - type: script
         dest-filename: run.sh
         commands:
