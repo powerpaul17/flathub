@@ -27,10 +27,10 @@ modules:
         commands:
           - zypak-wrapper.sh /app/main/yatoo "$@"
     build-commands:
-      - npm i
+      - npm ci
       - npm run build-prod
       - npm run capacitor-sync
-      - cd electron && npm i
+      - cd electron && npm ci
       - cd electron && npm run build
       - cd electron && npx electron-builder build --config ./electron-builder.config.json --linux --dir
       - cd electron && cp -a dist/linux*unpacked /app/main
