@@ -28,7 +28,7 @@ modules:
           - zypak-wrapper.sh /app/main/yatoo "$@"
     build-commands:
       - npm i
-      - npm run build-dev # build-prod
+      - npm run build-prod
       - npm run capacitor-sync
       - cd electron && npm i
       - cd electron && npm run build
