@@ -8,8 +8,11 @@ base: org.electronjs.Electron2.BaseApp
 base-version: '22.08'
 build-options:
   append-path: /usr/lib/sdk/node18/bin
-  build-args:
-    - --share=network
+  env:
+    XDG_CACHE_HOME: /run/build/yatoo/flatpak-node/cache
+    npm_config_cache: /run/build/yatoo/flatpak-node/npm-cache
+    npm_config_nodedir: /usr/lib/sdk/node18
+    npm_config_offline: 'true'
 finish-args:
   - --socket=x11
   - --share=network
@@ -22,6 +25,7 @@ modules:
       - type: git
         url: https://github.com/powerpaul17/yatoo.git
         tag: v0.5.1
+      - generated-sources-npm.json
       - type: script
         dest-filename: run.sh
         commands:
